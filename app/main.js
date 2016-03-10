@@ -10,18 +10,23 @@ var userInputEl = document.getElementById('userInput');
 var submitBtnEl = document.getElementById('submitBtn');
 var number;
 
+
 // =============================================================================
 // Some example functions, to get you started. You can change, delete, add to
 // these however you like!
 // =============================================================================
 
 function generateNumber() {
-  return 5;
+  var number = Math.floor(Math.random() * 100);
+  return number;
 };
+
 
 function clearInput() {
   userInputEl.value = '';
 };
+
+
 
 // =============================================================================
 // The guessing game. Everytime the user clicks the button on the page, this
@@ -38,16 +43,31 @@ function clearInput() {
 
 function guessingGame(userInput) {
 
+  guess = parseInt(userInput);
+  console.log(submitBtnEl.value);
+
   if (!userInput) {
     if (submitBtnEl.value === "Start") {
       number = generateNumber();
-      submitBtnEl.value = "Submit"
+      console.log(number);
+      submitBtnEl.value = "Submit";
     }
-    msgDisplayEl.innerHTML = "Please guess the number 5"
-  } else if (userInput === "5") {
-    msgDisplayEl.innerHTML = "You guessed it! Great job!"
+    msgDisplayEl.innerHTML = "Please guess the number between 0 and 100";
+  } else if (guess === number) {
+    msgDisplayEl.innerHTML = "You guessed it! Great job! Do you want to play again?";
     clearInput();
-    submitBtnEl.value = "Play Again"
+    submitBtnEl.value = "Play Again";
+      if (submitBtnEl.value === "Play Again") {    
+        submitBtnEl.value = "Submit";
+        console.log(submitBtnEl.value);
+      }
+  
+  } else if (guess < number) {
+    msgDisplayEl.innerHTML = "Guess higher";
+    clearInput();
+  } else {
+    msgDisplayEl.innerHTML = "Guess lower";
+    clearInput();
   }
 
 }

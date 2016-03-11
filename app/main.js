@@ -43,26 +43,19 @@ function clearInput() {
 
 function guessingGame(userInput) {
 
-
+   
 
   if (!userInput) {
-    if (submitBtnEl.value === "Start") {
+    if ((submitBtnEl.value === "Start") || (submitBtnEl.value === "Play Again")) {
       number = generateNumber();
-      console.log(number);
       submitBtnEl.value = "Submit";
     }
     msgDisplayEl.innerHTML = "Please guess the number between 0 and 100";
   } else if (parseFloat(userInput) === number) {
-      msgDisplayEl.innerHTML = "You guessed it! Great job! Do you want to play again?";
-      console.log(submitBtnEl.value);
-      submitBtnEl.value = "Play Again";   
-      if (submitBtnEl.value === "Play Again") {
-      //reset the game and the computer should pick a new random number
-        number = generateNumber();
-        clearInput();
-      }
-
-     }  else if (parseFloat(userInput) < number) {
+    msgDisplayEl.innerHTML = "You guessed it! Great job! Do you want to play again?";
+    clearInput();
+    submitBtnEl.value = "Play Again";   
+  } else if (parseFloat(userInput) < number) {
     msgDisplayEl.innerHTML = "Guess a higher number.";
     clearInput();
   } else {

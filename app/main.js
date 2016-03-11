@@ -8,8 +8,9 @@
 var msgDisplayEl = document.getElementById('msgDisplay');
 var userInputEl = document.getElementById('userInput');
 var submitBtnEl = document.getElementById('submitBtn');
+var msgDisplayEl = document.getElementById('guessDisplay');
 var number;
-
+var numberGuesses;
 
 // =============================================================================
 // Some example functions, to get you started. You can change, delete, add to
@@ -43,23 +44,28 @@ function clearInput() {
 
 function guessingGame(userInput) {
 
-   
+  
 
   if (!userInput) {
     if ((submitBtnEl.value === "Start") || (submitBtnEl.value === "Play Again")) {
+      numberGuesses = 0;
       number = generateNumber();
       submitBtnEl.value = "Submit";
     }
-    msgDisplayEl.innerHTML = "Please guess the number between 0 and 100";
+    msgDisplayEl.innerHTML = "Please guess a number between 0 and 100";
   } else if (parseFloat(userInput) === number) {
-    msgDisplayEl.innerHTML = "You guessed it! Great job! Do you want to play again?";
+    numberGuesses++;
+    msgDisplayEl.innerHTML = "You guessed it! It took you Do you want to play again?";
+    guessDisplayEl.innerHTML ="It took you "+numberGuesses+ " guesses";  
     clearInput();
     submitBtnEl.value = "Play Again";   
   } else if (parseFloat(userInput) < number) {
     msgDisplayEl.innerHTML = "Guess a higher number.";
+    numberGuesses++;
     clearInput();
   } else {
     msgDisplayEl.innerHTML = "Guess a lower number.";
+    numberGuesses++; 
     clearInput();
   }
 
